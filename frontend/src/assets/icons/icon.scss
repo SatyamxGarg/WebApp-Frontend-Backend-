@@ -1,0 +1,1046 @@
+@import "./_variables";
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?2m7bh2');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?2m7bh2#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?2m7bh2') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?2m7bh2') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?2m7bh2##{$icomoon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+i, [class^="qi-"], [class*=" qi-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}' !important;
+  speak: never;
+  font-style: normal;
+  font-size: large;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.qi-broom {
+  &:before {
+    content: $qi-broom;
+  }
+}
+.qi-adjust {
+  &:before {
+    content: $qi-adjust;
+  }
+}
+.qi-refresh {
+  &:before {
+    content: $qi-refresh;
+  }
+}
+.qi-user-bold {
+  &:before {
+    content: $qi-user-bold;
+  }
+}
+.qi-activity-bold {
+  &:before {
+    content: $qi-activity-bold;
+  }
+}
+.qi-arrow-down-3-bold {
+  &:before {
+    content: $qi-arrow-down-3-bold;
+  }
+}
+.qi-arrow-down-bold {
+  &:before {
+    content: $qi-arrow-down-bold;
+  }
+}
+.qi-arrow-down-square-bold {
+  &:before {
+    content: $qi-arrow-down-square-bold;
+  }
+}
+.qi-arrow-left-2-bold {
+  &:before {
+    content: $qi-arrow-left-2-bold;
+  }
+}
+.qi-arrow-left-3-bold {
+  &:before {
+    content: $qi-arrow-left-3-bold;
+  }
+}
+.qi-arrow-left-square-bold {
+  &:before {
+    content: $qi-arrow-left-square-bold;
+  }
+}
+.qi-arrow-right-bold {
+  &:before {
+    content: $qi-arrow-right-bold;
+  }
+}
+.qi-arrow-right-circle-bold {
+  &:before {
+    content: $qi-arrow-right-circle-bold;
+  }
+}
+.qi-arrow-up-2-bold {
+  &:before {
+    content: $qi-arrow-up-2-bold;
+  }
+}
+.qi-arrow-up-3-bold {
+  &:before {
+    content: $qi-arrow-up-3-bold;
+  }
+}
+.qi-arrow-up-bold {
+  &:before {
+    content: $qi-arrow-up-bold;
+  }
+}
+.qi-arrow-up-circle-bold {
+  &:before {
+    content: $qi-arrow-up-circle-bold;
+  }
+}
+.qi-arrow-up-square-bold {
+  &:before {
+    content: $qi-arrow-up-square-bold;
+  }
+}
+.qi-bag-2-bold {
+  &:before {
+    content: $qi-bag-2-bold;
+  }
+}
+.qi-bag-bold {
+  &:before {
+    content: $qi-bag-bold;
+  }
+}
+.qi-bookmark-bold {
+  &:before {
+    content: $qi-bookmark-bold;
+  }
+}
+.qi-calling-bold {
+  &:before {
+    content: $qi-calling-bold;
+  }
+}
+.qi-call-missed-bold {
+  &:before {
+    content: $qi-call-missed-bold;
+  }
+}
+.qi-camera-bold {
+  &:before {
+    content: $qi-camera-bold;
+  }
+}
+.qi-chart-bold {
+  &:before {
+    content: $qi-chart-bold;
+  }
+}
+.qi-chat-bold {
+  &:before {
+    content: $qi-chat-bold;
+  }
+}
+.qi-delete-bold {
+  &:before {
+    content: $qi-delete-bold;
+  }
+}
+.qi-discount-bold {
+  &:before {
+    content: $qi-discount-bold;
+  }
+}
+.qi-download-bold {
+  &:before {
+    content: $qi-download-bold;
+  }
+}
+.qi-edit-bold {
+  &:before {
+    content: $qi-edit-bold;
+  }
+}
+.qi-edit-square-bold {
+  &:before {
+    content: $qi-edit-square-bold;
+  }
+}
+.qi-filter-2-bold {
+  &:before {
+    content: $qi-filter-2-bold;
+  }
+}
+.qi-graph-bold {
+  &:before {
+    content: $qi-graph-bold;
+  }
+}
+.qi-image-bold {
+  &:before {
+    content: $qi-image-bold;
+  }
+}
+.qi-lock-bold {
+  &:before {
+    content: $qi-lock-bold;
+  }
+}
+.qi-message-bold {
+  &:before {
+    content: $qi-message-bold;
+  }
+}
+.qi-more-circle-bold {
+  &:before {
+    content: $qi-more-circle-bold;
+  }
+}
+.qi-more-square-bold {
+  &:before {
+    content: $qi-more-square-bold;
+  }
+}
+.qi-notification-bold {
+  &:before {
+    content: $qi-notification-bold;
+  }
+}
+.qi-paper-bold {
+  &:before {
+    content: $qi-paper-bold;
+  }
+}
+.qi-paper-download-bold {
+  &:before {
+    content: $qi-paper-download-bold;
+  }
+}
+.qi-paper-negative-bold {
+  &:before {
+    content: $qi-paper-negative-bold;
+  }
+}
+.qi-paper-upload-bold {
+  &:before {
+    content: $qi-paper-upload-bold;
+  }
+}
+.qi-play-bold {
+  &:before {
+    content: $qi-play-bold;
+  }
+}
+.qi-plus-bold {
+  &:before {
+    content: $qi-plus-bold;
+  }
+}
+.qi-send-bold {
+  &:before {
+    content: $qi-send-bold;
+  }
+}
+.qi-shield-done-bold {
+  &:before {
+    content: $qi-shield-done-bold;
+  }
+}
+.qi-shield-fail-bold {
+  &:before {
+    content: $qi-shield-fail-bold;
+  }
+}
+.qi-ticket-star-bold {
+  &:before {
+    content: $qi-ticket-star-bold;
+  }
+}
+.qi-tick-square-bold {
+  &:before {
+    content: $qi-tick-square-bold;
+  }
+}
+.qi-time-square-bold {
+  &:before {
+    content: $qi-time-square-bold;
+  }
+}
+.qi-unlock-bold {
+  &:before {
+    content: $qi-unlock-bold;
+  }
+}
+.qi-voice-2-bold {
+  &:before {
+    content: $qi-voice-2-bold;
+  }
+}
+.qi-voice-bold {
+  &:before {
+    content: $qi-voice-bold;
+  }
+}
+.qi-volume-down-bold {
+  &:before {
+    content: $qi-volume-down-bold;
+  }
+}
+.qi-volume-up-bold {
+  &:before {
+    content: $qi-volume-up-bold;
+  }
+}
+.qi-wallet-bold {
+  &:before {
+    content: $qi-wallet-bold;
+  }
+}
+.qi-user-bold1 {
+  &:before {
+    content: $qi-user-bold1;
+  }
+}
+.qi-add-user-bold {
+  &:before {
+    content: $qi-add-user-bold;
+  }
+}
+.qi-arrow-down-2-bold {
+  &:before {
+    content: $qi-arrow-down-2-bold;
+  }
+}
+.qi-arrow-down-circle-bold {
+  &:before {
+    content: $qi-arrow-down-circle-bold;
+  }
+}
+.qi-arrow-left-bold {
+  &:before {
+    content: $qi-arrow-left-bold;
+  }
+}
+.qi-arrow-left-circle-bold {
+  &:before {
+    content: $qi-arrow-left-circle-bold;
+  }
+}
+.qi-arrow-right-2-bold {
+  &:before {
+    content: $qi-arrow-right-2-bold;
+  }
+}
+.qi-arrow-right-3-bold {
+  &:before {
+    content: $qi-arrow-right-3-bold;
+  }
+}
+.qi-arrow-right-square-bold {
+  &:before {
+    content: $qi-arrow-right-square-bold;
+  }
+}
+.qi-buy-bold {
+  &:before {
+    content: $qi-buy-bold;
+  }
+}
+.qi-calendar-bold {
+  &:before {
+    content: $qi-calendar-bold;
+  }
+}
+.qi-call-bold {
+  &:before {
+    content: $qi-call-bold;
+  }
+}
+.qi-call-silent-bold {
+  &:before {
+    content: $qi-call-silent-bold;
+  }
+}
+.qi-category-bold {
+  &:before {
+    content: $qi-category-bold;
+  }
+}
+.qi-close-square-bold {
+  &:before {
+    content: $qi-close-square-bold;
+  }
+}
+.qi-danger-bold {
+  &:before {
+    content: $qi-danger-bold;
+  }
+}
+.qi-discovery-bold {
+  &:before {
+    content: $qi-discovery-bold;
+  }
+}
+.qi-document-bold {
+  &:before {
+    content: $qi-document-bold;
+  }
+}
+.qi-filter-bold {
+  &:before {
+    content: $qi-filter-bold;
+  }
+}
+.qi-folder-bold {
+  &:before {
+    content: $qi-folder-bold;
+  }
+}
+.qi-game-bold {
+  &:before {
+    content: $qi-game-bold;
+  }
+}
+.qi-heart-bold {
+  &:before {
+    content: $qi-heart-bold;
+  }
+}
+.qi-hide-bold {
+  &:before {
+    content: $qi-hide-bold;
+  }
+}
+.qi-home-bold {
+  &:before {
+    content: $qi-home-bold;
+  }
+}
+.qi-image-2-bold {
+  &:before {
+    content: $qi-image-2-bold;
+  }
+}
+.qi-info-circle-bold {
+  &:before {
+    content: $qi-info-circle-bold;
+  }
+}
+.qi-info-square-bold {
+  &:before {
+    content: $qi-info-square-bold;
+  }
+}
+.qi-location-bold {
+  &:before {
+    content: $qi-location-bold;
+  }
+}
+.qi-login-bold {
+  &:before {
+    content: $qi-login-bold;
+  }
+}
+.qi-logout-bold {
+  &:before {
+    content: $qi-logout-bold;
+  }
+}
+.qi-paper-fail-bold {
+  &:before {
+    content: $qi-paper-fail-bold;
+  }
+}
+.qi-paper-plus-bold {
+  &:before {
+    content: $qi-paper-plus-bold;
+  }
+}
+.qi-password-bold {
+  &:before {
+    content: $qi-password-bold;
+  }
+}
+.qi-profile-bold {
+  &:before {
+    content: $qi-profile-bold;
+  }
+}
+.qi-scan-bold {
+  &:before {
+    content: $qi-scan-bold;
+  }
+}
+.qi-search-bold {
+  &:before {
+    content: $qi-search-bold;
+  }
+}
+.qi-setting-bold {
+  &:before {
+    content: $qi-setting-bold;
+  }
+}
+.qi-show-bold {
+  &:before {
+    content: $qi-show-bold;
+  }
+}
+.qi-star-bold {
+  &:before {
+    content: $qi-star-bold;
+  }
+}
+.qi-swap-bold {
+  &:before {
+    content: $qi-swap-bold;
+  }
+}
+.qi-ticket-bold {
+  &:before {
+    content: $qi-ticket-bold;
+  }
+}
+.qi-time-circle-bold {
+  &:before {
+    content: $qi-time-circle-bold;
+  }
+}
+.qi-upload-bold {
+  &:before {
+    content: $qi-upload-bold;
+  }
+}
+.qi-video-bold {
+  &:before {
+    content: $qi-video-bold;
+  }
+}
+.qi-volume-off-bold {
+  &:before {
+    content: $qi-volume-off-bold;
+  }
+}
+.qi-work-bold {
+  &:before {
+    content: $qi-work-bold;
+  }
+}
+.qi-user {
+  &:before {
+    content: $qi-user;
+  }
+}
+.qi-users {
+  &:before {
+    content: $qi-users;
+  }
+}
+.qi-activity {
+  &:before {
+    content: $qi-activity;
+  }
+}
+.qi-add-user {
+  &:before {
+    content: $qi-add-user;
+  }
+}
+.qi-arrow-down-3 {
+  &:before {
+    content: $qi-arrow-down-3;
+  }
+}
+.qi-arrow-down-square {
+  &:before {
+    content: $qi-arrow-down-square;
+  }
+}
+.qi-arrow-left {
+  &:before {
+    content: $qi-arrow-left;
+  }
+}
+.qi-arrow-left-2 {
+  &:before {
+    content: $qi-arrow-left-2;
+  }
+}
+.qi-arrow-left-square {
+  &:before {
+    content: $qi-arrow-left-square;
+  }
+}
+.qi-arrow-right {
+  &:before {
+    content: $qi-arrow-right;
+  }
+}
+.qi-arrow-right-2 {
+  &:before {
+    content: $qi-arrow-right-2;
+  }
+}
+.qi-arrow-right-3 {
+  &:before {
+    content: $qi-arrow-right-3;
+  }
+}
+.qi-arrow-right-circle {
+  &:before {
+    content: $qi-arrow-right-circle;
+  }
+}
+.qi-arrow-up-3 {
+  &:before {
+    content: $qi-arrow-up-3;
+  }
+}
+.qi-arrow-up-square {
+  &:before {
+    content: $qi-arrow-up-square;
+  }
+}
+.qi-buy {
+  &:before {
+    content: $qi-buy;
+  }
+}
+.qi-calendar {
+  &:before {
+    content: $qi-calendar;
+  }
+}
+.qi-call {
+  &:before {
+    content: $qi-call;
+  }
+}
+.qi-calling {
+  &:before {
+    content: $qi-calling;
+  }
+}
+.qi-call-silent {
+  &:before {
+    content: $qi-call-silent;
+  }
+}
+.qi-camera {
+  &:before {
+    content: $qi-camera;
+  }
+}
+.qi-category {
+  &:before {
+    content: $qi-category;
+  }
+}
+.qi-chat {
+  &:before {
+    content: $qi-chat;
+  }
+}
+.qi-close-square {
+  &:before {
+    content: $qi-close-square;
+  }
+}
+.qi-danger-circle {
+  &:before {
+    content: $qi-danger-circle;
+  }
+}
+.qi-delete {
+  &:before {
+    content: $qi-delete;
+  }
+}
+.qi-discount {
+  &:before {
+    content: $qi-discount;
+  }
+}
+.qi-discovery {
+  &:before {
+    content: $qi-discovery;
+  }
+}
+.qi-document {
+  &:before {
+    content: $qi-document;
+  }
+}
+.qi-edit {
+  &:before {
+    content: $qi-edit;
+  }
+}
+.qi-edit-square {
+  &:before {
+    content: $qi-edit-square;
+  }
+}
+.qi-filter-3 {
+  &:before {
+    content: $qi-filter-3;
+  }
+}
+.qi-folder {
+  &:before {
+    content: $qi-folder;
+  }
+}
+.qi-game {
+  &:before {
+    content: $qi-game;
+  }
+}
+.qi-graph {
+  &:before {
+    content: $qi-graph;
+  }
+}
+.qi-hide {
+  &:before {
+    content: $qi-hide;
+  }
+}
+.qi-home {
+  &:before {
+    content: $qi-home;
+  }
+}
+.qi-info-square {
+  &:before {
+    content: $qi-info-square;
+  }
+}
+.qi-lock {
+  &:before {
+    content: $qi-lock;
+  }
+}
+.qi-logout {
+  &:before {
+    content: $qi-logout;
+  }
+}
+.qi-more-circle {
+  &:before {
+    content: $qi-more-circle;
+  }
+}
+.qi-more-square {
+  &:before {
+    content: $qi-more-square;
+  }
+}
+.qi-notification {
+  &:before {
+    content: $qi-notification;
+  }
+}
+.qi-paper {
+  &:before {
+    content: $qi-paper;
+  }
+}
+.qi-paper-fail {
+  &:before {
+    content: $qi-paper-fail;
+  }
+}
+.qi-paper-plus {
+  &:before {
+    content: $qi-paper-plus;
+  }
+}
+.qi-password {
+  &:before {
+    content: $qi-password;
+  }
+}
+.qi-play {
+  &:before {
+    content: $qi-play;
+  }
+}
+.qi-search {
+  &:before {
+    content: $qi-search;
+  }
+}
+.qi-send {
+  &:before {
+    content: $qi-send;
+  }
+}
+.qi-shield-done {
+  &:before {
+    content: $qi-shield-done;
+  }
+}
+.qi-shield-fail {
+  &:before {
+    content: $qi-shield-fail;
+  }
+}
+.qi-show {
+  &:before {
+    content: $qi-show;
+  }
+}
+.qi-star {
+  &:before {
+    content: $qi-star;
+  }
+}
+.qi-swap {
+  &:before {
+    content: $qi-swap;
+  }
+}
+.qi-ticket-star {
+  &:before {
+    content: $qi-ticket-star;
+  }
+}
+.qi-tick-square {
+  &:before {
+    content: $qi-tick-square;
+  }
+}
+.qi-time-circle {
+  &:before {
+    content: $qi-time-circle;
+  }
+}
+.qi-time-square {
+  &:before {
+    content: $qi-time-square;
+  }
+}
+.qi-unlock {
+  &:before {
+    content: $qi-unlock;
+  }
+}
+.qi-upload {
+  &:before {
+    content: $qi-upload;
+  }
+}
+.qi-video {
+  &:before {
+    content: $qi-video;
+  }
+}
+.qi-voice {
+  &:before {
+    content: $qi-voice;
+  }
+}
+.qi-voice-3 {
+  &:before {
+    content: $qi-voice-3;
+  }
+}
+.qi-volume-down {
+  &:before {
+    content: $qi-volume-down;
+  }
+}
+.qi-volume-off {
+  &:before {
+    content: $qi-volume-off;
+  }
+}
+.qi-volume-up {
+  &:before {
+    content: $qi-volume-up;
+  }
+}
+.qi-wallet {
+  &:before {
+    content: $qi-wallet;
+  }
+}
+.qi-work {
+  &:before {
+    content: $qi-work;
+  }
+}
+.qi-arrow-down {
+  &:before {
+    content: $qi-arrow-down;
+  }
+}
+.qi-arrow-down-2 {
+  &:before {
+    content: $qi-arrow-down-2;
+  }
+}
+.qi-arrow-down-circle {
+  &:before {
+    content: $qi-arrow-down-circle;
+  }
+}
+.qi-arrow-left-3 {
+  &:before {
+    content: $qi-arrow-left-3;
+  }
+}
+.qi-arrow-left-circle {
+  &:before {
+    content: $qi-arrow-left-circle;
+  }
+}
+.qi-arrow-right-square {
+  &:before {
+    content: $qi-arrow-right-square;
+  }
+}
+.qi-arrow-up {
+  &:before {
+    content: $qi-arrow-up;
+  }
+}
+.qi-arrow-up-2 {
+  &:before {
+    content: $qi-arrow-up-2;
+  }
+}
+.qi-arrow-up-circle {
+  &:before {
+    content: $qi-arrow-up-circle;
+  }
+}
+.qi-bag {
+  &:before {
+    content: $qi-bag;
+  }
+}
+.qi-bag-3 {
+  &:before {
+    content: $qi-bag-3;
+  }
+}
+.qi-bookmark {
+  &:before {
+    content: $qi-bookmark;
+  }
+}
+.qi-call-missed {
+  &:before {
+    content: $qi-call-missed;
+  }
+}
+.qi-chart {
+  &:before {
+    content: $qi-chart;
+  }
+}
+.qi-danger-triangle {
+  &:before {
+    content: $qi-danger-triangle;
+  }
+}
+.qi-download {
+  &:before {
+    content: $qi-download;
+  }
+}
+.qi-filter {
+  &:before {
+    content: $qi-filter;
+  }
+}
+.qi-heart {
+  &:before {
+    content: $qi-heart;
+  }
+}
+.qi-image {
+  &:before {
+    content: $qi-image;
+  }
+}
+.qi-image-3 {
+  &:before {
+    content: $qi-image-3;
+  }
+}
+.qi-location {
+  &:before {
+    content: $qi-location;
+  }
+}
+.qi-login {
+  &:before {
+    content: $qi-login;
+  }
+}
+.qi-message {
+  &:before {
+    content: $qi-message;
+  }
+}
+.qi-paper-download {
+  &:before {
+    content: $qi-paper-download;
+  }
+}
+.qi-paper-negative {
+  &:before {
+    content: $qi-paper-negative;
+  }
+}
+.qi-paper-upload {
+  &:before {
+    content: $qi-paper-upload;
+  }
+}
+.qi-plus {
+  &:before {
+    content: $qi-plus;
+  }
+}
+.qi-profile {
+  &:before {
+    content: $qi-profile;
+  }
+}
+.qi-scan {
+  &:before {
+    content: $qi-scan;
+  }
+}
+.qi-setting {
+  &:before {
+    content: $qi-setting;
+  }
+}
+.qi-ticket {
+  &:before {
+    content: $qi-ticket;
+  }
+}
+

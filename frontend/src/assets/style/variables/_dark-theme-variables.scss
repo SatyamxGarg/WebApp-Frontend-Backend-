@@ -1,0 +1,111 @@
+.dark-theme {
+
+  --primary-text-color: #ffffff;
+  --secondary-text-color: #9ea3ad;
+  --primary-background-color: #0d1831;
+  --secondary-background-color: #2c3447;
+  --primary-background-hover-color: #dcdfec;   // need to check
+  --inverted-color-background: #ffffff;
+  --ui-border-color: #565d6c;
+  --layout-border-color: #324060;
+  --light-border: #f0f1f3;   // need to checked
+  --input-hover-color: #323238;  // need to checked
+  --sidebar-toggle-btn-border-color: #324060;  // ""
+
+  --popup-bg-color: #0e1421;
+
+  --filter-bg-color: #0d1831;
+
+  --filter-text-color: #ffffff;
+
+  --select-border-color: #3d465a;
+
+  --select-bg-color: #2c3447;
+
+  --select-text-color: #6b717e;
+
+  --filter-cancel-btn-color: #ffffff;
+
+  --icon-bg-color: #3d465a;
+
+  --uploaded-bg-color: #3d465a;
+
+  --uploaded-files-border: #eeeeee66;
+
+  --size-color: #ffffff;
+
+  --primary-anchor-color: #ffffff;
+
+  --chips-bg-color: #ccdaff;
+
+  --template-pg-bg-color: #2c3447;
+
+  --template-inner-box-bg-color: #0d1831;
+
+  --tabs-bg-color: #2c3447;
+
+  --tabs-border-color: #565d6c;
+
+  --tab-btn-color: #9ea3ad;
+
+  --main-border: #b3b3b3;
+
+  --active-color: #ffffff;
+
+  --after-border: #0d1831;
+
+  --selection-main-color: #3d465a;
+
+  --preview-text-color: #9ea3ad;
+
+  /******panel-colors********/
+
+  --panel-bg-color: #0d1831;
+  --panel-text-color: #ffffff;
+  --notification-bg-color: #ffffff1a;
+
+  /*******table-page********/
+
+  --table-page-bg-color: #252f46;
+  --table-page-border-color: #99999933;
+  --table-page-text-color: #ffffff;
+
+  --search-bar-bg-color: #ffffff1a;
+  --search-bar-text-color: #ffffff;
+  --search-bar-placeholder-color: #ffffff80;
+
+  --tertiary-button-text-color: #ffffff;
+
+  --secondry-button-bg-color: #ffffff1a;  //""
+  --secondry-button-border-color: #ffffff33; //""
+  --secondry-button-text-color: #ffffff;
+
+  /*****datatable-colors******/
+
+  --datatable-text-color: #ffffff;
+  --datatable-header-bg-color: #3d465a;
+  --datatable-header-text-color: #ffffff;
+  --datatable-body-bg-color: #0d1831;
+  --datatable-row-bg-color-even: #0d1831;
+  --datatable-row-bg-color-odd: #0d1831;
+  --datatable-row-border-bottom-color: #2c3447;
+  --row-text-circle-color: #0d1831;
+  --footer-inner-color: #abaeb5;
+  --footer-inner-li-color: #ffffff;
+
+   /* Input lists (e.g. dropdown) */
+   --inputlist-bg-color: #1f2937;
+   --inputlist-item-text-color: #f3f4f6;
+   --inputlist-item-hover-bg: #4b5563 ;
+   --inputlist-item-hover-text-color: #f3f4f6;
+   --inputlist-item-focus-bg: #6b7280;
+   --inputlist-item-text-focus-color: #f3f4f6;
+
+   --input-icon-color: #e5e7eb;
+
+   /* Calender */
+   --calender-bg: #1f2937;
+   --calender-text-color: #f3f4f6;
+   --calender-date-hover-bg: #4b5563;
+
+}

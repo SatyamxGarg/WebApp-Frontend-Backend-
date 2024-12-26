@@ -1,0 +1,16 @@
+.login-wrapper {
+    .login-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 54px;
+      width: 100%;
+  
+      .remember-me {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+    }
+  }
+  

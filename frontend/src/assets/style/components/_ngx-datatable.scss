@@ -1,0 +1,256 @@
+.ngx-datatable {
+  color: var(--datatable-text-color);
+  display: block;
+  overflow-y: hidden !important;
+  overflow-x: hidden;
+  justify-content: center;
+  position: relative;
+  transform: translate(0);
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1 !important;
+  font-weight: 600;
+
+  &.chips-body{
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+
+    datatable-body {
+      height: calc(100vh - 230px - 1rem) !important;
+    }
+  }
+  .datatable-header-inner{
+    align-items: center;
+  }
+  datatable-header {
+    height: 38px !important;
+    background-color: var(--datatable-header-bg-color);
+    color: var(--datatable-header-text-color);
+    padding: 8px 0;
+  }
+  datatable-body {
+    // margin-top: 36px;
+    padding: 0px;
+    background-color: var(--datatable-body-bg-color);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: calc(100vh - 184px - 1rem) !important;
+    datatable-row-wrapper {
+      height: 40px;
+    }
+    datatable-body-row {
+      outline: none;
+      align-items: center;
+      height: 100% !important;
+      border-bottom: 1px solid var(--datatable-row-border-bottom-color);
+
+      &.datatable-row-even{
+        background-color: var(--datatable-row-bg-color-even);
+      }
+      &.datatable-row-odd{
+        background-color: var(--datatable-row-bg-color-odd);
+      }
+      &:hover{
+        background-color: rgb(0, 0, 0, 0.1);
+        cursor: pointer;
+      }
+
+      .datatable-body-cell-label {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 6px;
+        width: 100%;
+
+        .avtar-circle {
+          height: 24px;
+          min-width: 24px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--row-text-circle-color);
+          line-height: 1 !important;
+          padding: 0;
+
+          &.avtar1 {
+            background-color: var(--avtar-color-1);
+          }
+
+          &.avtar2 {
+            background-color: var(--avtar-color-2);
+          }
+
+          &.avtar3 {
+            background-color: var(--avtar-color-3);
+          }
+
+          &.avtar4 {
+            background-color: var(--avtar-color-4);
+          }
+
+          &.avtar5 {
+            background-color: var(--avtar-color-5);
+          }
+
+          &.avtar6 {
+            background-color: var(--avtar-color-6);
+          }
+
+          &.avtar7 {
+            background-color: var(--avtar-color-7);
+          }
+        }
+        .status {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          .status-symbol {
+            height: 8px;
+            width: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 4px;
+            padding: 0;
+          }
+          .processed  {
+            background-color: var(--status-approved-color);
+          }
+          .failed {
+            background-color: var(--status-rejected-color);
+          }
+          .processing {
+            background: url('/assets/images/loader.gif');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+          }
+          .pending {
+            background-color: var(--status-pending-color);
+          }
+        }
+      }
+    }
+  }
+}
+
+.ngx-datatable .datatable-body-cell,
+.ngx-datatable .datatable-header-cell {
+  display: flex !important;
+  align-items: center;
+  overflow: hidden !important;
+  padding: 0rem 0.5rem;
+}
+
+.ngx-datatable .datatable-header-cell {
+  .datatable-header-cell-template-wrap{
+    width: 100%;
+    .datatable-checkbox{
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+
+.ngx-datatable .datatable-footer .datatable-footer-inner {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  color: #7e7e7e;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14.06px;
+}
+
+.ngx-datatable .datatable-footer .datatable-pager .pager,
+.ngx-datatable .datatable-footer .datatable-pager .pager li {
+  padding: 0;
+  margin: 0;
+  display: flex !important;
+  list-style: none !important;
+  align-items: center !important;
+  justify-content: end !important;
+  a {
+    text-decoration: none;
+    color: var(--footer-inner-color);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 14px;
+    padding: 6px 10px;
+    i {
+      font-size: 18px;
+      position: relative;
+      top: 3px;
+    }
+  }
+  &.active {
+    a {
+      background-color: var(--primary-color);
+      border-radius: 4px;
+      color: #ffffff;
+    }
+  }
+}
+.ngx-datatable .datatable-footer .datatable-pager .pager, .ngx-datatable .datatable-footer .datatable-pager .pager li {
+  @media screen and (max-width:444px) {
+    width: 100% !important;
+  }
+}
+
+.ngx-datatable .datatable-header .datatable-header-cell .resize-handle,
+.ngx-datatable .datatable-header .datatable-header-cell .resize-handle--not-resizable {
+  visibility: visible !important;
+  width: 1px !important;
+  border-radius: 8px;
+  // margin: 0 1rem;
+  padding: 0 !important;
+  background: var(--datatable-header-text-color);
+}
+
+.datatable-row-wrapper {
+  justify-content: center;
+  .datatable-body-cell-label {
+    .datatable-checkbox{
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    .datatable-checkbox+span{
+      display: none;
+    }
+    & > span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-right: 20px;
+    }
+
+    p-dropdown {
+      width: 100%;
+      & > div {
+        width: 100%;
+      }
+      .p-dropdown{
+        background: transparent;
+      }
+    }
+    input {
+      width: 100%;
+    }
+    .p-inputtext {
+      padding: 0.25rem;
+      font-size: 0.8rem;
+      background: transparent;
+    }
+    .p-button{
+      font-size: 0.5rem;
+      padding: 0.25rem;
+      &.p-button-icon-only{
+        width: auto;
+        padding: 0.25rem;
+      }
+    }
+  }
+}

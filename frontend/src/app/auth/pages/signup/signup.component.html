@@ -1,0 +1,109 @@
+<section class="signup-wrapper">
+    <div class="header">
+      <h2>Register Here</h2>
+      <p>
+        Already have an account?
+        <a routerLink="/auth/login" class="text-primary">Login</a>
+      </p>
+    </div>
+  
+    <form [formGroup]="signUp" (ngSubmit)="onSubmit()" class="p-fluid">
+      <div class="field">
+        <label for="firstName" class="block text-left">First Name</label>
+        <input
+          id="firstName"
+          pInputText
+          class="w-full"
+          formControlName="firstName"
+          placeholder="First Name"
+        />
+        <small
+          *ngIf="signUp.get('firstName')?.invalid && signUp.get('firstName')?.touched"
+          class="p-error"
+        >
+          Please enter First Name
+        </small>
+      </div>
+  
+      <div class="field">
+        <label for="lastName" class="block text-left">Last Name</label>
+        <input id="lastName" pInputText formControlName="lastName" placeholder="Last Name" />
+        <small
+          *ngIf="signUp.get('lastName')?.invalid && signUp.get('lastName')?.touched"
+          class="p-error"
+        >
+          Please enter Last Name
+        </small>
+      </div>
+  
+      <div class="field">
+        <label for="email" class="block text-left">Email Address</label>
+        <input
+          id="email"
+          pInputText
+          type="email"
+          formControlName="email"
+          placeholder="Email Address"
+        />
+        <small *ngIf="signUp.get('email')?.invalid && signUp.get('email')?.touched" class="p-error">
+          Please enter a valid email
+        </small>
+      </div>
+  
+      <div class="field">
+        <label for="password" class="block text-left">Password</label>
+        <p-password
+          id="password"
+          formControlName="password"
+          placeholder="Password"
+          [toggleMask]="true"
+          [feedback]="false"
+        />
+        <small *ngIf="signUp.get('password')?.invalid && signUp.get('password')?.touched">
+          <div *ngIf="signUp.get('password')?.errors?.['required']" class="p-error">
+            Password is required
+          </div>
+          <div *ngIf="signUp.get('password')?.errors?.['missingUpperCase']" class="p-error">
+            Password must contain at least one uppercase letter.
+          </div>
+          <div *ngIf="signUp.get('password')?.errors?.['missingLowerCase']" class="p-error">
+            Password must contain at least one lowercase letter.
+          </div>
+          <div *ngIf="signUp.get('password')?.errors?.['missingNumber']" class="p-error">
+            Password must contain at least one number.
+          </div>
+          <div *ngIf="signUp.get('password')?.errors?.['missingSpecialChar']" class="p-error">
+            Password must contain at least one special character.
+          </div>
+          <div *ngIf="signUp.get('password')?.errors?.['invalidLength']" class="p-error">
+            Password must be at least 8 characters long.
+          </div>
+        </small>
+      </div>
+  
+      <div class="field">
+        <label for="c-password" class="block text-left">Confirm Password</label>
+        <p-password
+          id="c-password"
+          formControlName="cpassword"
+          placeholder="Confirm Password"
+          [toggleMask]="true"
+          [feedback]="false"
+        />
+        <small
+          *ngIf="
+            signUp.get('password')?.value !== signUp.get('cpassword')?.value &&
+            signUp.get('cpassword')?.touched
+          "
+          class="p-error"
+        >
+          Passwords do not match
+        </small>
+      </div>
+  
+      <div class="field mt-3">
+        <button pButton type="submit" label="Sign Up" class="w-full" [disabled]="loader"></button>
+      </div>
+    </form>
+  </section>
+  

@@ -1,0 +1,65 @@
+<section class="login-wrapper">
+    <div class="header">
+      <p>
+        Don’t have an account?
+        <span>
+          <a [routerLink]="'/auth/register'" class="text text-links">Register here</a>
+          , Join us today and get started!
+        </span>
+      </p>
+    </div>
+  
+    <form name="signin" [formGroup]="loginForm" (submit)="onSubmit()" class="p-fluid">
+      <div class="field">
+        <label for="email" class="block">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          pInputText
+          formControlName="email"
+          placeholder="Email Address"
+        />
+        <small
+          *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+          class="p-error"
+        >
+          Please enter a valid email
+        </small>
+      </div>
+  
+      <div class="field">
+        <label for="password" class="block">Password</label>
+        <p-password
+          [feedback]="false"
+          id="password"
+          formControlName="password"
+          placeholder="Password"
+        />
+        <small
+          *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+          class="p-error"
+        >
+          Password is required
+        </small>
+      </div>
+  
+      <div class="login-footer">
+        <!-- <div class="remember-me">
+          <p-checkbox
+            id="remember-me"
+            [binary]="true"
+            inputId="binary"
+            class="mr-2"
+            formControlName="remember"
+          />
+          <label for="remember-me">Remember Me</label>
+        </div> -->
+        <a [routerLink]="'/auth/forgot-password'" class="text text-links">Forgot Password</a>
+      </div>
+  
+      <div class="field">
+        <button pButton type="submit" label="Sign In" class="w-full" [disabled]="loader"></button>
+      </div>
+    </form>
+  </section>
+  

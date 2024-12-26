@@ -1,0 +1,105 @@
+$primary-fs: 32px;
+$secondary-fs: 20px;
+$tertiary-fs: 16px;
+$fourth-heading-fs: 18px;
+$subtitle-1-fs: 16px;
+$subtitle-2-fs: 14px;
+$caption-bold-fs: 12px;
+$general-text-fs: 13px;
+$capitalize-heading-fs: 14px;
+$label-fs: 13px;
+$label-large-fs: 14px;
+$small-fs: 13px;
+$icon-small-fs: 18px;
+$icon-large-fs: 22px;
+
+.primary-heading {
+  font-size: $primary-fs !important;
+  font-weight: 700 !important;
+  line-height: 42px !important;
+}
+h1 {
+  font-size: $primary-fs !important;
+  font-weight: 700 !important;
+  line-height: 42px !important;
+}
+
+.secondary-heading,
+h2 {
+  font-size: $secondary-fs !important;
+  font-weight: 700 !important;
+  line-height: 30px !important;
+  color: var(--primary_text_color);
+}
+
+.tertiary-heading {
+  font-size: $tertiary-fs !important;
+  font-weight: 300 !important;
+  line-height: 30px !important;
+}
+h3 {
+  font-size: $tertiary-fs !important;
+  font-weight: 300 !important;
+  line-height: 30px !important;
+}
+
+.fourth-heading {
+  font-size: $fourth-heading-fs !important;
+  font-weight: 700 !important;
+  line-height: 26px !important;
+}
+h4 {
+  font-size: $fourth-heading-fs !important;
+  font-weight: 700 !important;
+  line-height: 26px !important;
+}
+
+.subtitle-1,
+h5 {
+  font-size: $subtitle-1-fs !important;
+  font-weight: 700 !important;
+  line-height: 24px !important;
+  color: var(--primary-text-color);
+}
+
+.subtitle-2 {
+  font-size: $subtitle-2-fs !important;
+  font-weight: 700 !important;
+  line-height: 22px !important;
+}
+h6 {
+  font-size: $subtitle-2-fs !important;
+  font-weight: 700 !important;
+  line-height: 22px !important;
+}
+
+.caption-bold {
+  font-size: $caption-bold-fs !important;
+  font-weight: 700 !important;
+  line-height: 20px !important;
+}
+
+.general-text,
+p {
+  font-size: $general-text-fs !important;
+  font-weight: 400 !important;
+  line-height: 20px !important;
+  color: var(--secondary_text_color);
+}
+
+.label,
+label {
+  font-size: $label-fs !important;
+  font-weight: 500 !important;
+  line-height: 22px !important;
+}
+
+a {
+  font-size: $label-fs;
+  font-weight: 500;
+  color: var(--primary_color);
+
+  &:hover {
+    color: var(--primary_color_hover);
+  }
+}

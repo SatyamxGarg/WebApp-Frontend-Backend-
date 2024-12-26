@@ -1,0 +1,10 @@
+@import './variables/_default-theme-variables';
+@import './variables/_dark-theme-variables';
+@import './variables/_light-theme-variables';
+
+@import './primeNg/theme/primeTheme.scss';
+
+@import './_typography';
+
+@import './components/_scrollbar';
+@import './components/_ngx-datatable';
