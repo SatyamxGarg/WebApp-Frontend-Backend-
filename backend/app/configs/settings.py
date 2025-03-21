@@ -23,21 +23,21 @@ class ApplicationSettings(BaseSettings):
     JWT_EXPIRE_TIME_MIN: int = 3000
    
     MONGODB_HOST: str = "localhost"
-    MONGODB_DATABASE: str = "qsight"
+    MONGODB_DATABASE: str = "shopping"
     MONGODB_PORT: int= None
 
     SENDER_EMAIL: str = ""
     SENDER_PASSWORD: str = ""
     
-    S3_BUCKET_NAME: str = "qsight-documents"
+    # S3_BUCKET_NAME: str = "qsight-documents"
     
-    AWS_REGION: str = "us-east-1"
-    AWS_ACCESS_ID: str = ""
-    AWS_SECRET_KEY: str = ""
-    AWS_SESSION_TOKEN: str = ""
+    # AWS_REGION: str = "us-east-1"
+    # AWS_ACCESS_ID: str = ""
+    # AWS_SECRET_KEY: str = ""
+    # AWS_SESSION_TOKEN: str = ""
 
-    SNS_TOPIC_ARN: str = ""
-    SNS_POWER_ROLE_ARN: str = ""
+    # SNS_TOPIC_ARN: str = ""
+    # SNS_POWER_ROLE_ARN: str = ""
     
     class Config:
         case_sensitive = True

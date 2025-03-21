@@ -1,3 +1,4 @@
+from datetime import datetime
 import uuid
 from pydantic import BaseModel, Field
 from typing import TypeVar, Generic, Literal, Any, Optional
@@ -21,3 +22,7 @@ class ResponseWrapper(BaseModel, Generic[T]):
                 "execution_id": "9f1b6e5d8a7c4b6f8d93e2a1f3a1a9e7"
             }
         }
+
+class TimestampMixin(BaseModel):
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None

@@ -5,11 +5,10 @@ from jose import jwt, JWTError
 from typing import Optional, Dict, Any
 
 from app.configs import settings
-from app.schemas.auth import Token, UserLogin, UserSignUp
+from app.schemas.auth import Token, UserLogin, UserSignUp, UpdateUser
 from app.schemas import ResponseWrapper
 from app.models.user import User
 from app.utils.crypto import hash_password, verify_password
-from app.utils.extras import get_template
 from app.dependencies import get_current_user
 
 router = APIRouter()
@@ -72,10 +71,25 @@ async def read_users_me(current_user: User = Depends(get_current_user)):
         message="User details fetched successfully", 
         data={
             'email': current_user.email,
-            'created_at': current_user.created_at,
-            'updated_at': current_user.updated_at,
             'first_name': current_user.first_name,
             'last_name': current_user.last_name,
+            'created_at': current_user.created_at,
+            'updated_at': current_user.updated_at
         }, 
         error=None
     )
+
+@router.put("/update",response_model=ResponseWrapper[Dict[str,Any]])
+async def update_user(updated_data: UpdateUser, current_user: User = Depends(get_current_user)):
+        if updated_data.first_name:
+            current_user.first_name = updated_data.first_name
+        if updated_data.last_name:
+            current_user.last_name = updated_data.last_name
+        
+        current_user.save()
+        return ResponseWrapper(status="SUCCESS",message="Details Updated Successfully!",data={
+            "email":current_user.email,
+            "first_name":current_user.first_name,
+            "last_name":current_user.last_name
+        },error=None)
+        

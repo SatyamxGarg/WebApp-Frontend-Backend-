@@ -44,13 +44,14 @@ class Token(BaseModel):
             }
         }
 
-# Schema for token data
-class TokenData(BaseModel):
-    username: Optional[str] = Field(None, description="Username or email associated with the token")
+class UpdateUser(BaseModel):
+    first_name: Optional[str] = Field(None, description="User's first name")
+    last_name: Optional[str] = Field(None, description="User's last name")
 
     class Config:
         json_schema_extra = {
             "example": {
-                "username": "user@example.com"
+                "first_name": "John",
+                "last_name": "Doe"
             }
         }
