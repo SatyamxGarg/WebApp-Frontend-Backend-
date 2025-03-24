@@ -4,12 +4,6 @@ from app.models.order import OrderStatus, PaymentStatus
 from app.schemas.product import ProductResponse
 from . import TimestampMixin
 T = TypeVar('T')
-
-
-# class OrderRequest(BaseModel):
-#     email: EmailStr = Field(..., description="User's email address")
-#     product_id :str = Field(...,description="Unique ID of product")
-#     quantity: int = Field(..., description="Quantity of product")
     
 
 class UserResponse(BaseModel):
@@ -37,5 +31,16 @@ class Config:
                 "payment_status":"Pending",
                 "created_at": "2023-09-01T08:00:00",
                 "updated_at": "2023-09-14T12:45:30"
+            }
+        }
+
+
+class RequestOrderStatus(TimestampMixin,BaseModel):
+    status: OrderStatus = Field(..., description="Status of order")
+    
+class Config:
+        json_schema_extra = {
+            "example": {
+                "status": "pending"
             }
         }

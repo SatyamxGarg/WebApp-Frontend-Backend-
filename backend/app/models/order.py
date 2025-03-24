@@ -8,7 +8,7 @@ class OrderStatus(Enum):
     PENDING = 'pending'
     SHIPPED = 'shipped'
     DELIVERED = 'delivered'
-    FAILED = 'failed'
+    CANCELED = 'canceled'
     
 class PaymentStatus(Enum):
     PENDING = 'pending'

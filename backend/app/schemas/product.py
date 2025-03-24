@@ -28,6 +28,7 @@ class ProductResponse(TimestampMixin, BaseModel):
     product_price: float = Field(..., description="Price of product")
     product_description: str = Field(...,description="Description of product")
     product_stock: int = Field(...,description="Available Stock of product")
+    product_rating :float = Field(...,description="Average rating of product")
 
     class Config:
         json_schema_extra = {
@@ -38,6 +39,7 @@ class ProductResponse(TimestampMixin, BaseModel):
                 "product_price": 500.00,
                 "product_description": "This is the product description",
                 "product_stock": 10,
+                "product_rating": 4.5,
                 "created_at": "2023-09-01T08:00:00",
                 "updated_at": "2023-09-14T12:45:30"
             }

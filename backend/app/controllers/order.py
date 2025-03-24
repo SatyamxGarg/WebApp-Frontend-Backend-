@@ -5,8 +5,8 @@ from app.schemas import ResponseWrapper
 from app.models.cart import Cart
 from app.models.user import User
 from app.dependencies.get_user import get_current_user
-from app.models.order import Order
-from app.schemas.order import OrderResponse, UserResponse
+from app.models.order import Order, OrderStatus
+from app.schemas.order import OrderResponse, RequestOrderStatus, UserResponse
 from app.schemas.product import ProductResponse
 
 router = APIRouter()
@@ -79,6 +79,7 @@ async def get_all_orders(user: User = Depends(get_current_user)):
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
+
 # Get Order by ID
 @router.get("/{id}",response_model=ResponseWrapper[OrderResponse])
 async def get_order(id: str, user: User = Depends(get_current_user)):
@@ -91,6 +92,71 @@ async def get_order(id: str, user: User = Depends(get_current_user)):
         return ResponseWrapper(status="SUCCESS",message="Order fetched successfully",
                                data=OrderResponse(
                                     id=str(order.id),
+                                user = UserResponse(id=str(user.id), email=user.email),
+                                product = [ProductResponse(id=str(item.id), product_name=item.product_name, product_id=item.product_id,
+                                                           product_price=item.product_price, product_description=item.product_description,
+                                                           product_stock=item.product_stock,created_at=item.created_at,updated_at=item.updated_at)
+                                           for item in order.product],
+                                total_price = order.total_price,
+                                status = order.status,
+                                payment_status = order.payment_status,
+                                created_at = order.created_at,
+                                updated_at = order.updated_at
+                                ),error=None)
+        
+    except ValidationError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    
+
+# Update Order Status
+@router.put("/{id}",response_model=ResponseWrapper[OrderResponse])
+async def update_order_status(id: str, order_status: RequestOrderStatus, user :User=(Depends(get_current_user))):
+    try:
+        order: Order = Order.objects(id=id, user=user).first()
+        
+        if not order:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Order not Found")
+        
+        if order_status.status:
+            order.status = order_status.status
+             
+        order.save()
+        return ResponseWrapper(status="SUCCESS",message="Status Updated Successfully",
+                               data=OrderResponse(
+                                id=str(order.id),
+                                user = UserResponse(id=str(user.id), email=user.email),
+                                product = [ProductResponse(id=str(item.id), product_name=item.product_name, product_id=item.product_id,
+                                                           product_price=item.product_price, product_description=item.product_description,
+                                                           product_stock=item.product_stock,created_at=item.created_at,updated_at=item.updated_at)
+                                           for item in order.product],
+                                total_price = order.total_price,
+                                status = order.status,
+                                payment_status = order.payment_status,
+                                created_at = order.created_at,
+                                updated_at = order.updated_at
+                                ),error=None)
+        
+    except ValidationError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    
+
+# Cancel Order by ID
+@router.put("/cancel/{id}",response_model=ResponseWrapper[OrderResponse])
+async def cancel_order(id: str, user: User=Depends(get_current_user)):
+    try:
+        order: Order = Order.objects(id=id,user=user).first()
+        
+        if not order:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Order not Found")
+
+        if str(order.status.value) in ["shipped", "delivered"]:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Cannot cancel a shipped / delivered order")
+        
+        order.status=OrderStatus.CANCELED
+        order.save()
+        return ResponseWrapper(status="SUCCESS", message="Order Canceled Successfully",
+                               data=OrderResponse(
+                                id=str(order.id),
                                 user = UserResponse(id=str(user.id), email=user.email),
                                 product = [ProductResponse(id=str(item.id), product_name=item.product_name, product_id=item.product_id,
                                                            product_price=item.product_price, product_description=item.product_description,

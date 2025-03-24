@@ -53,6 +53,7 @@ async def get_products():
                 product_description = product.product_description,
                 product_price=product.product_price,
                 product_stock = product.product_stock,
+                product_rating = product.product_rating,
                 created_at=str(product.created_at),
                 updated_at=str(product.updated_at)
             )
@@ -80,6 +81,7 @@ async def get_product(product_id: str):
                                    product_description = product.product_description,
                                    product_price=product.product_price,
                                    product_stock = product.product_stock,
+                                   product_rating = product.product_rating,
                                    created_at=str(product.created_at),
                                    updated_at=str(product.updated_at)
                                ),

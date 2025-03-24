@@ -9,3 +9,4 @@ class Product(Document, TimestampMixin):
     product_description = StringField()
     product_price = FloatField(required=True)
     product_stock = IntField(required=True)
+    product_rating = FloatField(default=0.0)
