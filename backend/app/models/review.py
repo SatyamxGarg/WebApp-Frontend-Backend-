@@ -5,6 +5,8 @@ from .product import Product
 
 
 class Review(Document, TimestampMixin):
+    meta = {'collection': 'review'}
+     
     user = ReferenceField(User, required=True)
     product = ReferenceField(Product, required=True)
     rating = IntField(min_value=1, max_value=5, required=True)

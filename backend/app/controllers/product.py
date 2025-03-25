@@ -31,6 +31,7 @@ async def add_product(product: ProductRequest):
             product_description = product.product_description,
             product_price=product.product_price,
             product_stock = product.product_stock,
+            product_rating = product.product_rating,
             created_at=str(product.created_at),
             updated_at=str(product.updated_at)
         ),
@@ -121,6 +122,7 @@ async def update_product(product_id: str, product_req: UpdateProduct):
                                    product_description = product.product_description,
                                    product_price=product.product_price,
                                    product_stock = product.product_stock,
+                                   product_rating = product.product_rating,
                                    created_at=str(product.created_at),
                                    updated_at=str(product.updated_at)
                                 ),error=None)
