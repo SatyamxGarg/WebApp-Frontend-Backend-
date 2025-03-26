@@ -5,7 +5,9 @@ from app.controllers import (
     cart,
     order,
     review,
-    wishlist
+    wishlist,
+    category,
+    subcategory
 )
 
 root_api_router = APIRouter(prefix="/api/v1")
@@ -16,3 +18,5 @@ root_api_router.include_router(cart.router, prefix="/cart", tags=["CART ENDPOINT
 root_api_router.include_router(order.router, prefix="/order", tags=["ORDER ENDPOINTS"])
 root_api_router.include_router(review.router, prefix="/review", tags=["REVIEW ENDPOINTS"])
 root_api_router.include_router(wishlist.router, prefix="/wishlist", tags=["WISHLIST ENDPOINTS"])
+root_api_router.include_router(category.router, prefix="/category", tags=["CATEGORY ENDPOINTS"])
+root_api_router.include_router(subcategory.router, prefix="/subcategory", tags=["SUBCATEGORY ENDPOINTS"])

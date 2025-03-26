@@ -4,6 +4,7 @@ from mongoengine import ValidationError
 from app.schemas.product import ProductRequest, ProductResponse, UpdateProduct
 from app.schemas import ResponseWrapper
 from app.models.product import Product
+from app.models.subcategory import Subcategory
 
 router = APIRouter()
 
@@ -15,12 +16,17 @@ async def add_product(product: ProductRequest):
         if existing_product:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Product ID already exists")
         
+        subcategory: Subcategory = Subcategory.objects(id=product.subcategory)
+        if not subcategory:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Subcategory not Found")
+            
         product: Product = Product(
             product_name = product.product_name,
             product_id = product.product_id,
             product_description = product.product_description,
             product_price = product.product_price,
-            product_stock = product.product_stock
+            product_stock = product.product_stock,
+            subcategory = product.subcategory
         )
         product.save()
         return ResponseWrapper(status="SUCCESS",message="Product Added Successfully",
@@ -32,6 +38,7 @@ async def add_product(product: ProductRequest):
             product_price=product.product_price,
             product_stock = product.product_stock,
             product_rating = product.product_rating,
+            subcategory = product.subcategory,
             created_at=str(product.created_at),
             updated_at=str(product.updated_at)
         ),
