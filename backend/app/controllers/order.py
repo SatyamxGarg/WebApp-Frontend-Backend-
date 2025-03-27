@@ -7,7 +7,7 @@ from app.models.user import User
 from app.dependencies.get_user import get_current_user
 from app.models.order import Order, OrderStatus
 from app.schemas.order import OrderResponse, RequestOrderStatus, UserResponse
-from app.schemas.product import ProductResponse
+from app.schemas.product import OrderProductResponse, ProductResponse
 
 router = APIRouter()
 
@@ -33,9 +33,9 @@ async def create_order(user: User = Depends(get_current_user)):
                                data=OrderResponse(
                                 id=str(order.id),
                                 user = UserResponse(id=str(user.id), email=user.email),
-                                product = [ProductResponse(id=str(item.id), product_name=item.product_name, product_id=item.product_id,
+                                product = [OrderProductResponse(id=str(item.id), product_name=item.product_name, product_id=item.product_id,
                                                            product_price=item.product_price, product_description=item.product_description,
-                                                           product_stock=item.product_stock,created_at=item.created_at,updated_at=item.updated_at)
+                                                           created_at=item.created_at,updated_at=item.updated_at)
                                            for item in order.product],
                                 total_price = order.total_price,
                                 status = order.status,
@@ -61,9 +61,9 @@ async def get_all_orders(user: User = Depends(get_current_user)):
             OrderResponse(
                 id=str(order.id),
                 user = UserResponse(id=str(user.id), email=user.email),
-                product = [ProductResponse(id=str(item.id), product_name=item.product_name, product_id=item.product_id,
+                product = [OrderProductResponse(id=str(item.id), product_name=item.product_name, product_id=item.product_id,
                                            product_price=item.product_price, product_description=item.product_description,
-                                           product_stock=item.product_stock,created_at=item.created_at,updated_at=item.updated_at)
+                                           created_at=item.created_at,updated_at=item.updated_at)
                                         for item in order.product],
                 total_price = order.total_price,
                 status = order.status,
@@ -91,11 +91,11 @@ async def get_order(id: str, user: User = Depends(get_current_user)):
         
         return ResponseWrapper(status="SUCCESS",message="Order fetched successfully",
                                data=OrderResponse(
-                                    id=str(order.id),
+                                id=str(order.id),
                                 user = UserResponse(id=str(user.id), email=user.email),
-                                product = [ProductResponse(id=str(item.id), product_name=item.product_name, product_id=item.product_id,
+                                product = [OrderProductResponse(id=str(item.id), product_name=item.product_name, product_id=item.product_id,
                                                            product_price=item.product_price, product_description=item.product_description,
-                                                           product_stock=item.product_stock,created_at=item.created_at,updated_at=item.updated_at)
+                                                           created_at=item.created_at,updated_at=item.updated_at)
                                            for item in order.product],
                                 total_price = order.total_price,
                                 status = order.status,
@@ -125,9 +125,9 @@ async def update_order_status(id: str, order_status: RequestOrderStatus, user :U
                                data=OrderResponse(
                                 id=str(order.id),
                                 user = UserResponse(id=str(user.id), email=user.email),
-                                product = [ProductResponse(id=str(item.id), product_name=item.product_name, product_id=item.product_id,
+                                product = [OrderProductResponse(id=str(item.id), product_name=item.product_name, product_id=item.product_id,
                                                            product_price=item.product_price, product_description=item.product_description,
-                                                           product_stock=item.product_stock,created_at=item.created_at,updated_at=item.updated_at)
+                                                           created_at=item.created_at,updated_at=item.updated_at)
                                            for item in order.product],
                                 total_price = order.total_price,
                                 status = order.status,
@@ -158,9 +158,9 @@ async def cancel_order(id: str, user: User=Depends(get_current_user)):
                                data=OrderResponse(
                                 id=str(order.id),
                                 user = UserResponse(id=str(user.id), email=user.email),
-                                product = [ProductResponse(id=str(item.id), product_name=item.product_name, product_id=item.product_id,
+                                product = [OrderProductResponse(id=str(item.id), product_name=item.product_name, product_id=item.product_id,
                                                            product_price=item.product_price, product_description=item.product_description,
-                                                           product_stock=item.product_stock,created_at=item.created_at,updated_at=item.updated_at)
+                                                           created_at=item.created_at,updated_at=item.updated_at)
                                            for item in order.product],
                                 total_price = order.total_price,
                                 status = order.status,

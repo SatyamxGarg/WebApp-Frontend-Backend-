@@ -76,3 +76,7 @@ class SubcategoryResponse(TimestampMixin, BaseModel):
                 "updated_at": "2023-09-14T12:45:30"
             }
         }
+        
+
+class UpdateSubcategory(BaseModel):
+    subcategory_description: str = Field(..., description="Subcategory Description")

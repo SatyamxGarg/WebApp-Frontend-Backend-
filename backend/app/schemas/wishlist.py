@@ -1,13 +1,13 @@
 from pydantic import BaseModel, Field
 from app.schemas.order import UserResponse
-from app.schemas.product import ProductResponse
+from app.schemas.product import OrderProductResponse
 from . import TimestampMixin
 
 
 class WishlistResponse(TimestampMixin, BaseModel):
     id: str = Field(..., description="Unique identifier for Wishlist")
     user : UserResponse = Field(..., description="Users' Reference")
-    products: list[ProductResponse] = Field(..., description="List of Product's Response")
+    products: list[OrderProductResponse] = Field(..., description="List of Product's Response")
     
     class Config:
         json_schema_extra = {

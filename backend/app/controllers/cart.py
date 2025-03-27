@@ -15,7 +15,7 @@ router = APIRouter()
 async def add_to_cart(cart_request: CartRequest):
     try:
         user: User = User.objects(email=cart_request.email).first()
-        product: Product = Product.objects(product_id=cart_request.product_id).first()
+        product: Product = Product.objects(id=cart_request.id).first()
         
         if not user or not product:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User or Product not found")
@@ -35,7 +35,7 @@ async def add_to_cart(cart_request: CartRequest):
                                data=CartResponse(
                                    id=str(cart.id),
                                    email=str(user.email),
-                                   product_id = str(product.product_id),
+                                   product_id = str(product.id),
                                    quantity = cart.quantity,    
                                    created_at=str(cart.created_at),
                                    updated_at=str(cart.updated_at)
@@ -54,7 +54,7 @@ async def get_cart_item(user: User = Depends(get_current_user)):
             CartResponse(
                 id=str(cart_item.id),
                 email=str(user.email),
-                product_id=str(cart_item.product.product_id),
+                product_id=str(cart_item.product.id),
                 quantity=cart_item.quantity,
                 created_at=str(cart_item.created_at),
                 updated_at=str(cart_item.updated_at)
@@ -69,11 +69,10 @@ async def get_cart_item(user: User = Depends(get_current_user)):
  
 
 # Update Cart Item Quantity
-@router.put("/",response_model=ResponseWrapper[CartResponse])
-async def update_cart_item_quantity(cart_update: CartUpdate, user = Depends(get_current_user)):
+@router.put("/{id}",response_model=ResponseWrapper[CartResponse])
+async def update_cart_item_quantity(id: str, cart_update: CartUpdate, user = Depends(get_current_user)):
     try:
-        cart_item: Cart = Cart.objects(user=user, id=cart_update.id).first()
-        
+        cart_item: Cart = Cart.objects(user=user, id=id).first()
         if not cart_item:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Cart Item not found")
 
@@ -84,7 +83,7 @@ async def update_cart_item_quantity(cart_update: CartUpdate, user = Depends(get_
                                data=CartResponse(
                                    id=str(cart_item.id),
                                    email=str(cart_item.user.email),
-                                   product_id = str(cart_item.product.product_id),
+                                   product_id = str(cart_item.product.id),
                                    quantity = cart_item.quantity,
                                    created_at=str(cart_item.created_at),
                                    updated_at=str(cart_item.updated_at)

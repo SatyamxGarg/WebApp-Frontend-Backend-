@@ -2,7 +2,7 @@ from typing import List
 from fastapi import HTTPException, APIRouter, status
 from mongoengine import ValidationError
 from app.schemas import ResponseWrapper
-from app.schemas.category import CategoryResponse, SubcategoryRequest, SubcategoryResponse
+from app.schemas.category import CategoryResponse, SubcategoryRequest, SubcategoryResponse, UpdateSubcategory
 from app.models.category import Category
 from app.models.subcategory import Subcategory
 
@@ -51,13 +51,13 @@ async def create_subcatgeory(subcategory_req: SubcategoryRequest):
 
 # Get All Subcategories from Category
 @router.get("/{id}", response_model=ResponseWrapper[list[SubcategoryResponse]])
-async def get_subcategory(id: str):
+async def get_subcategories(id: str):
     try:
         category: Category = Category.objects(id=id).first()
         if not category:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Category Not Found")
         
-        subcategories : Subcategory = Subcategory.objects(category=category)
+        subcategories : List[Subcategory] = Subcategory.objects(category=category)
         if not subcategories:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="There are No Subcategories for this Category")
         
@@ -78,6 +78,83 @@ async def get_subcategory(id: str):
                                    created_at = subcategory.created_at,
                                    updated_at = subcategory.updated_at
                                 ) for subcategory in subcategories), error=None)
+        
+    except ValidationError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    
+
+# Get Subcategory by Name
+@router.get("/name/{subcategory_name}", response_model=ResponseWrapper[SubcategoryResponse])
+async def get_subcategory(subcategory_name: str):
+    try:
+        subcategory: Subcategory = Subcategory.objects(subcategory_name=subcategory_name).first()
+        if not subcategory:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Subcategory Not Found")
+        
+        return ResponseWrapper(status="SUCCESS", message="Subcategory Fetched Successfully",
+                               data= SubcategoryResponse(
+                                   id = str(subcategory.id),
+                                   subcategory_id= subcategory.subcategory_id,
+                                   subcategory_name = subcategory.subcategory_name,
+                                   subcategory_description = subcategory.subcategory_description,
+                                   category = CategoryResponse(
+                                       id = str(subcategory.category.id),
+                                       category_id = subcategory.category.category_id,
+                                       category_name = subcategory.category.category_name,
+                                       category_description = subcategory.category.category_description,
+                                       created_at = subcategory.category.created_at,
+                                       updated_at = subcategory.category.updated_at
+                                       ),
+                                   created_at = subcategory.created_at,
+                                   updated_at = subcategory.updated_at
+                               ),error=None)
+    
+    except ValidationError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    
+
+# Update Subcategory Description
+@router.put("/{id}", response_model=ResponseWrapper[SubcategoryResponse])
+async def update_subcatgeory(id: str, update_subcategory: UpdateSubcategory):
+    try:
+        subcategory: Subcategory = Subcategory.objects(id=id).first()
+        if not subcategory:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Subcategory Not Found")
+        
+        subcategory.subcategory_description = update_subcategory.subcategory_description
+        subcategory.save()
+        return ResponseWrapper(status="SUCCESS", message="Subcategory Updated Successfully",
+                               data= SubcategoryResponse(
+                                   id = str(subcategory.id),
+                                   subcategory_id= subcategory.subcategory_id,
+                                   subcategory_name = subcategory.subcategory_name,
+                                   subcategory_description = subcategory.subcategory_description,
+                                   category = CategoryResponse(
+                                       id = str(subcategory.category.id),
+                                       category_id = subcategory.category.category_id,
+                                       category_name = subcategory.category.category_name,
+                                       category_description = subcategory.category.category_description,
+                                       created_at = subcategory.category.created_at,
+                                       updated_at = subcategory.category.updated_at
+                                       ),
+                                   created_at = subcategory.created_at,
+                                   updated_at = subcategory.updated_at
+                               ),error=None)
+
+    except ValidationError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+# Delete Subcategory
+@router.delete("/{id}", response_model=ResponseWrapper[None])
+async def delete_subcategory(id: str):
+    try:
+        subcategory: Subcategory = Subcategory.objects(id=id).first()
+        if not subcategory:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Subcategory Not Found")
+        
+        subcategory.delete()
+        return ResponseWrapper(status="SUCCESS", message="Subcategory Deleted Successfully", data=None, error=None)
         
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=str(e))

@@ -7,7 +7,7 @@ from app.models.product import Product
 from app.models.wishlist import Wishlist
 from app.schemas.wishlist import WishlistResponse
 from app.schemas.order import UserResponse
-from app.schemas.product import ProductResponse
+from app.schemas.product import OrderProductResponse
 
 router = APIRouter()
 
@@ -32,14 +32,12 @@ async def add_to_wishlist(id: str, user: User = Depends(get_current_user)):
                                    data = WishlistResponse(
                                        id = str(wishlist.id),
                                        user = UserResponse(id=str(user.id), email=user.email),
-                                       products = [ProductResponse(
+                                       products = [OrderProductResponse(
                                            id = str(product.id),
                                            product_name = product.product_name,
                                            product_id = product.product_id,
                                            product_description = product.product_description,
                                            product_price = product.product_price,
-                                           product_rating = product.product_rating,
-                                           product_stock = product.product_stock,
                                            created_at = product.created_at,
                                            updated_at = product.updated_at
                                         )],
@@ -57,14 +55,12 @@ async def add_to_wishlist(id: str, user: User = Depends(get_current_user)):
                                    id = str(wishlist.id),
                                    user = UserResponse(id=str(user.id), email=user.email),
                                    products = [
-                                       ProductResponse(
+                                       OrderProductResponse(
                                            id=str(product.id),
                                            product_name=product.product_name,
                                            product_id=product.product_id,
                                            product_description=product.product_description,
                                            product_price=product.product_price,
-                                           product_rating=product.product_rating,
-                                           product_stock=product.product_stock,
                                            created_at=product.created_at,
                                            updated_at=product.updated_at
                                         )
@@ -91,14 +87,12 @@ async def get_wishlist_items(user: User = Depends(get_current_user)):
                                    id = str(wishlist.id),
                                    user = UserResponse(id=str(user.id), email=user.email),
                                    products = [
-                                       ProductResponse(
+                                       OrderProductResponse(
                                            id=str(product.id),
                                            product_name=product.product_name,
                                            product_id=product.product_id,
                                            product_description=product.product_description,
                                            product_price=product.product_price,
-                                           product_rating=product.product_rating,
-                                           product_stock=product.product_stock,
                                            created_at=product.created_at,
                                            updated_at=product.updated_at
                                         )
