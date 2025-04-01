@@ -4,6 +4,7 @@ from mongoengine import ValidationError
 from app.schemas import ResponseWrapper
 from app.schemas.category import CategoryRequest, CategoryResponse, UpdateCategory
 from app.models.category import Category
+from app.utils.models_2_schemas.category import create_category_response
 
 router = APIRouter()
 
@@ -21,15 +22,7 @@ async def create_category(category_req: CategoryRequest):
             category_description = category_req.category_description
         )
         category.save()
-        return ResponseWrapper(status="SUCCESS",message="Category Created Successfully",
-                               data= CategoryResponse(
-                                  id=str(category.id),
-                                  category_id=category.category_id,
-                                  category_name=category.category_name,
-                                  category_description=category.category_description,
-                                  created_at=category.created_at,
-                                  updated_at=category.updated_at
-                               ),error=None)
+        return ResponseWrapper(status="SUCCESS",message="Category Created Successfully",data=create_category_response(category),error=None)
         
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -44,15 +37,10 @@ async def get_categories():
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Categories Not Found")
         
         return ResponseWrapper(status="SUCCESS", message="Categories Fetched Successfully",
-                               data=(CategoryResponse(
-                                  id=str(category.id),
-                                  category_id=category.category_id,
-                                  category_name=category.category_name,
-                                  category_description=category.category_description,
-                                  created_at=category.created_at,
-                                  updated_at=category.updated_at
-                               ) for category in categories),
-                                 error=None)
+                               data=[
+                                   create_category_response(category)
+                                   for category in categories
+                               ],error=None)
     
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -66,15 +54,7 @@ async def get_category(category_name :str):
         if not category:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Category Not Found")
         
-        return ResponseWrapper(status="SUCCESS", message="Category Fetched Successfully",
-                               data=CategoryResponse(
-                                  id=str(category.id),
-                                  category_id=category.category_id,
-                                  category_name=category.category_name,
-                                  category_description=category.category_description,
-                                  created_at=category.created_at,
-                                  updated_at=category.updated_at
-                               ),error=None)
+        return ResponseWrapper(status="SUCCESS", message="Category Fetched Successfully",data=create_category_response(category),error=None)
     
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -90,16 +70,8 @@ async def update_category(id: str, update_category: UpdateCategory):
 
         category.category_description = update_category.category_description
         category.save()
-        return ResponseWrapper(status="SUCCESS", message="Category Updated Successfully",
-                               data=CategoryResponse(
-                                  id=str(category.id),
-                                  category_id=category.category_id,
-                                  category_name=category.category_name,
-                                  category_description=category.category_description,
-                                  created_at=category.created_at,
-                                  updated_at=category.updated_at
-                               ),error=None)
-        
+        return ResponseWrapper(status="SUCCESS", message="Category Updated Successfully",data=create_category_response(category),error=None)
+      
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=str(e))
 

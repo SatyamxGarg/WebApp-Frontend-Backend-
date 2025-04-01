@@ -6,8 +6,8 @@ from app.models.cart import Cart
 from app.models.user import User
 from app.dependencies.get_user import get_current_user
 from app.models.order import Order, OrderStatus
-from app.schemas.order import OrderResponse, RequestOrderStatus, UserResponse
-from app.schemas.product import OrderProductResponse, ProductResponse
+from app.schemas.order import OrderResponse, RequestOrderStatus
+from app.utils.models_2_schemas.order import create_order_response
 
 router = APIRouter()
 
@@ -29,20 +29,7 @@ async def create_order(user: User = Depends(get_current_user)):
         order.save()
         Cart.objects(user=user).delete()
         
-        return ResponseWrapper(status="SUCCESS", message="Order Placed Successfully!",
-                               data=OrderResponse(
-                                id=str(order.id),
-                                user = UserResponse(id=str(user.id), email=user.email),
-                                product = [OrderProductResponse(id=str(item.id), product_name=item.product_name, product_id=item.product_id,
-                                                           product_price=item.product_price, product_description=item.product_description,
-                                                           created_at=item.created_at,updated_at=item.updated_at)
-                                           for item in order.product],
-                                total_price = order.total_price,
-                                status = order.status,
-                                payment_status = order.payment_status,
-                                created_at = order.created_at,
-                                updated_at = order.updated_at
-                                ),error=None)
+        return ResponseWrapper(status="SUCCESS", message="Order Placed Successfully!",data=create_order_response(order),error=None)
 
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -56,25 +43,11 @@ async def get_all_orders(user: User = Depends(get_current_user)):
         
         if not orders:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Orders not Found")
-    
-        order_list=[
-            OrderResponse(
-                id=str(order.id),
-                user = UserResponse(id=str(user.id), email=user.email),
-                product = [OrderProductResponse(id=str(item.id), product_name=item.product_name, product_id=item.product_id,
-                                           product_price=item.product_price, product_description=item.product_description,
-                                           created_at=item.created_at,updated_at=item.updated_at)
-                                        for item in order.product],
-                total_price = order.total_price,
-                status = order.status,
-                payment_status = order.payment_status,
-                created_at = order.created_at,
-                updated_at = order.updated_at
-            )
-            for order in orders
-        ]
         
-        return ResponseWrapper(status="SUCCESS",message="Orders fetched successfully",data=order_list,error=None)
+        return ResponseWrapper(status="SUCCESS",message="Orders fetched successfully",
+                               data=[create_order_response(order)
+                                     for order in orders],
+                               error=None)
     
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -89,21 +62,8 @@ async def get_order(id: str, user: User = Depends(get_current_user)):
         if not order:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Order not found")
         
-        return ResponseWrapper(status="SUCCESS",message="Order fetched successfully",
-                               data=OrderResponse(
-                                id=str(order.id),
-                                user = UserResponse(id=str(user.id), email=user.email),
-                                product = [OrderProductResponse(id=str(item.id), product_name=item.product_name, product_id=item.product_id,
-                                                           product_price=item.product_price, product_description=item.product_description,
-                                                           created_at=item.created_at,updated_at=item.updated_at)
-                                           for item in order.product],
-                                total_price = order.total_price,
-                                status = order.status,
-                                payment_status = order.payment_status,
-                                created_at = order.created_at,
-                                updated_at = order.updated_at
-                                ),error=None)
-        
+        return ResponseWrapper(status="SUCCESS",message="Order fetched successfully",data=create_order_response(order),error=None)
+
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=str(e))
     
@@ -121,20 +81,7 @@ async def update_order_status(id: str, order_status: RequestOrderStatus, user :U
             order.status = order_status.status
              
         order.save()
-        return ResponseWrapper(status="SUCCESS",message="Status Updated Successfully",
-                               data=OrderResponse(
-                                id=str(order.id),
-                                user = UserResponse(id=str(user.id), email=user.email),
-                                product = [OrderProductResponse(id=str(item.id), product_name=item.product_name, product_id=item.product_id,
-                                                           product_price=item.product_price, product_description=item.product_description,
-                                                           created_at=item.created_at,updated_at=item.updated_at)
-                                           for item in order.product],
-                                total_price = order.total_price,
-                                status = order.status,
-                                payment_status = order.payment_status,
-                                created_at = order.created_at,
-                                updated_at = order.updated_at
-                                ),error=None)
+        return ResponseWrapper(status="SUCCESS",message="Status Updated Successfully",data=create_order_response(order),error=None)
         
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -154,20 +101,7 @@ async def cancel_order(id: str, user: User=Depends(get_current_user)):
         
         order.status=OrderStatus.CANCELED
         order.save()
-        return ResponseWrapper(status="SUCCESS", message="Order Canceled Successfully",
-                               data=OrderResponse(
-                                id=str(order.id),
-                                user = UserResponse(id=str(user.id), email=user.email),
-                                product = [OrderProductResponse(id=str(item.id), product_name=item.product_name, product_id=item.product_id,
-                                                           product_price=item.product_price, product_description=item.product_description,
-                                                           created_at=item.created_at,updated_at=item.updated_at)
-                                           for item in order.product],
-                                total_price = order.total_price,
-                                status = order.status,
-                                payment_status = order.payment_status,
-                                created_at = order.created_at,
-                                updated_at = order.updated_at
-                                ),error=None)
+        return ResponseWrapper(status="SUCCESS", message="Order Canceled Successfully",data=create_order_response(order),error=None)
         
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=str(e))

@@ -6,6 +6,7 @@ from app.dependencies.get_user import get_current_user
 from app.schemas.review import ReviewRequest, ReviewResponse
 from app.models.product import Product
 from app.models.review import Review
+from app.utils.models_2_schemas.review import create_review_response
 
 router = APIRouter()
 
@@ -31,14 +32,7 @@ async def add_review(id: str, review_req: ReviewRequest, user: User = Depends(ge
         review.save()
         calculate_avg_rating(product)
         
-        return ResponseWrapper(status="SUCCESS", message="Product successfully Reviewed",
-                               data=ReviewResponse(
-                                   id=str(review.id),
-                                   rating=review.rating,
-                                   review_text=review.review_text,
-                                   created_at= review.created_at,
-                                   updated_at=review.updated_at
-                                   ),error=None)
+        return ResponseWrapper(status="SUCCESS", message="Product Successfully Reviewed", data=create_review_response(review), error=None)
         
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -54,17 +48,10 @@ async def get_reviews(id: str):
 
         reviews: list[Review] = Review.objects(product=product).order_by('-created_at')
         
-        review_list=[
-            ReviewResponse(
-                           id=str(review.id),
-                           rating=review.rating,
-                           review_text=review.review_text,
-                           created_at= review.created_at,
-                           updated_at=review.updated_at
-                           )
-            for review in reviews
-        ]
-        return ResponseWrapper(status="SUCCESS", message="Reviews fetched successfully", data=review_list, error=None)
+        return ResponseWrapper(status="SUCCESS", message="Reviews fetched successfully",
+                               data=[create_review_response(review)
+                                    for review in reviews],
+                                error=None)
         
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -83,14 +70,7 @@ async def update_review(id: str, review_req: ReviewRequest, user:User = Depends(
         review.review_text = review_req.review_text
         review.save()
         
-        return ResponseWrapper(status="SUCCESS", message="Review updated Successfully",
-                               data=ReviewResponse(
-                                   id=str(review.id),
-                                   rating=review.rating,
-                                   review_text=review.review_text,
-                                   created_at=review.created_at,
-                                   updated_at=review.updated_at
-                                ),error=None)
+        return ResponseWrapper(status="SUCCESS", message="Review updated Successfully", data=create_review_response(review),error=None)
         
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=str(e))

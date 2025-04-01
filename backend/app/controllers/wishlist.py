@@ -6,8 +6,7 @@ from app.dependencies.get_user import get_current_user
 from app.models.product import Product
 from app.models.wishlist import Wishlist
 from app.schemas.wishlist import WishlistResponse
-from app.schemas.order import UserResponse
-from app.schemas.product import OrderProductResponse
+from app.utils.models_2_schemas.wishlist import create_wishlist_response
 
 router = APIRouter()
 
@@ -28,47 +27,14 @@ async def add_to_wishlist(id: str, user: User = Depends(get_current_user)):
                 products = [product]
             )
             wishlist.save()
-            return ResponseWrapper(status="SUCCESS", message="Item added to Wishlist",
-                                   data = WishlistResponse(
-                                       id = str(wishlist.id),
-                                       user = UserResponse(id=str(user.id), email=user.email),
-                                       products = [OrderProductResponse(
-                                           id = str(product.id),
-                                           product_name = product.product_name,
-                                           product_id = product.product_id,
-                                           product_description = product.product_description,
-                                           product_price = product.product_price,
-                                           created_at = product.created_at,
-                                           updated_at = product.updated_at
-                                        )],
-                                        created_at = wishlist.created_at,
-                                        updated_at = wishlist.updated_at                                       
-                                       ), error=None)
+            return ResponseWrapper(status="SUCCESS", message="Item added to Wishlist", data=create_wishlist_response(wishlist), error=None)
 
         if product in wishlist.products:
             raise HTTPException(status_code=400, detail="Product already in wishlist")
         
         wishlist.products.append(product)
         wishlist.save()
-        return ResponseWrapper(status="SUCCESS", message="Item added to Wishlist Successfully",
-                               data = WishlistResponse(
-                                   id = str(wishlist.id),
-                                   user = UserResponse(id=str(user.id), email=user.email),
-                                   products = [
-                                       OrderProductResponse(
-                                           id=str(product.id),
-                                           product_name=product.product_name,
-                                           product_id=product.product_id,
-                                           product_description=product.product_description,
-                                           product_price=product.product_price,
-                                           created_at=product.created_at,
-                                           updated_at=product.updated_at
-                                        )
-                                        for product in wishlist.products
-                                    ],
-                                   created_at = wishlist.created_at,
-                                   updated_at = wishlist.updated_at                                   
-                                ),error=None)
+        return ResponseWrapper(status="SUCCESS", message="Item added to Wishlist Successfully", data=create_wishlist_response(wishlist), error=None)
 
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -82,26 +48,7 @@ async def get_wishlist_items(user: User = Depends(get_current_user)):
         if not wishlist:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Wishlist Not Exists")
         
-        return ResponseWrapper(status="SUCCESS",message="Wishlist Fetched Successfully",
-                               data= WishlistResponse(
-                                   id = str(wishlist.id),
-                                   user = UserResponse(id=str(user.id), email=user.email),
-                                   products = [
-                                       OrderProductResponse(
-                                           id=str(product.id),
-                                           product_name=product.product_name,
-                                           product_id=product.product_id,
-                                           product_description=product.product_description,
-                                           product_price=product.product_price,
-                                           created_at=product.created_at,
-                                           updated_at=product.updated_at
-                                        )
-                                        for product in wishlist.products
-                                    ],
-                                   created_at = wishlist.created_at,
-                                   updated_at = wishlist.updated_at                                   
-                                ),
-                                error=None)
+        return ResponseWrapper(status="SUCCESS",message="Wishlist Fetched Successfully",data=create_wishlist_response(wishlist),error=None)
         
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=str(e))

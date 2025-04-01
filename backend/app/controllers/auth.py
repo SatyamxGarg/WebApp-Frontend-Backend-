@@ -1,7 +1,7 @@
 from fastapi import HTTPException, Depends, APIRouter, status
 from mongoengine.errors import NotUniqueError
 from datetime import datetime, timedelta
-from jose import jwt, JWTError
+from jose import jwt
 from typing import Optional, Dict, Any
 
 from app.configs import settings
@@ -90,6 +90,8 @@ async def update_user(updated_data: UpdateUser, current_user: User = Depends(get
         return ResponseWrapper(status="SUCCESS",message="Details Updated Successfully!",data={
             "email":current_user.email,
             "first_name":current_user.first_name,
-            "last_name":current_user.last_name
+            "last_name":current_user.last_name,
+            'created_at': current_user.created_at,
+            'updated_at': current_user.updated_at
         },error=None)
         

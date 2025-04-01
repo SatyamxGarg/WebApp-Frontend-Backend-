@@ -2,9 +2,10 @@ from typing import List
 from fastapi import HTTPException, APIRouter, status
 from mongoengine import ValidationError
 from app.schemas import ResponseWrapper
-from app.schemas.category import CategoryResponse, SubcategoryRequest, SubcategoryResponse, UpdateSubcategory
+from app.schemas.category import SubcategoryRequest, SubcategoryResponse, UpdateSubcategory
 from app.models.category import Category
 from app.models.subcategory import Subcategory
+from app.utils.models_2_schemas.subcategory import create_subcategory_response
 
 router = APIRouter()
 
@@ -27,23 +28,7 @@ async def create_subcatgeory(subcategory_req: SubcategoryRequest):
             category = subcategory_req.category
         )
         subcategory.save()
-        return ResponseWrapper(status="SUCCESS", message="Subcategory Created Successfully",
-                               data=SubcategoryResponse(
-                                   id = str(subcategory.id),
-                                   subcategory_id= subcategory.subcategory_id,
-                                   subcategory_name = subcategory.subcategory_name,
-                                   subcategory_description = subcategory.subcategory_description,
-                                   category = CategoryResponse(
-                                       id = str(subcategory.category.id),
-                                       category_id = subcategory.category.category_id,
-                                       category_name = subcategory.category.category_name,
-                                       category_description = subcategory.category.category_description,
-                                       created_at = subcategory.category.created_at,
-                                       updated_at = subcategory.category.updated_at
-                                       ),
-                                   created_at = subcategory.created_at,
-                                   updated_at = subcategory.updated_at                                   
-                               ),error=None)
+        return ResponseWrapper(status="SUCCESS", message="Subcategory Created Successfully", data=create_subcategory_response(subcategory),error=None)
         
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -62,22 +47,9 @@ async def get_subcategories(id: str):
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="There are No Subcategories for this Category")
         
         return ResponseWrapper(status="SUCCESS",message="Subcategories Fetched Successfully",
-                               data=(SubcategoryResponse(
-                                   id = str(subcategory.id),
-                                   subcategory_id= subcategory.subcategory_id,
-                                   subcategory_name = subcategory.subcategory_name,
-                                   subcategory_description = subcategory.subcategory_description,
-                                   category = CategoryResponse(
-                                       id = str(subcategory.category.id),
-                                       category_id = subcategory.category.category_id,
-                                       category_name = subcategory.category.category_name,
-                                       category_description = subcategory.category.category_description,
-                                       created_at = subcategory.category.created_at,
-                                       updated_at = subcategory.category.updated_at
-                                       ),
-                                   created_at = subcategory.created_at,
-                                   updated_at = subcategory.updated_at
-                                ) for subcategory in subcategories), error=None)
+                               data=[create_subcategory_response(subcategory)
+                                     for subcategory in subcategories],
+                               error=None)
         
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -91,23 +63,7 @@ async def get_subcategory(subcategory_name: str):
         if not subcategory:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Subcategory Not Found")
         
-        return ResponseWrapper(status="SUCCESS", message="Subcategory Fetched Successfully",
-                               data= SubcategoryResponse(
-                                   id = str(subcategory.id),
-                                   subcategory_id= subcategory.subcategory_id,
-                                   subcategory_name = subcategory.subcategory_name,
-                                   subcategory_description = subcategory.subcategory_description,
-                                   category = CategoryResponse(
-                                       id = str(subcategory.category.id),
-                                       category_id = subcategory.category.category_id,
-                                       category_name = subcategory.category.category_name,
-                                       category_description = subcategory.category.category_description,
-                                       created_at = subcategory.category.created_at,
-                                       updated_at = subcategory.category.updated_at
-                                       ),
-                                   created_at = subcategory.created_at,
-                                   updated_at = subcategory.updated_at
-                               ),error=None)
+        return ResponseWrapper(status="SUCCESS", message="Subcategory Fetched Successfully",data=create_subcategory_response(subcategory),error=None)
     
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -123,23 +79,7 @@ async def update_subcatgeory(id: str, update_subcategory: UpdateSubcategory):
         
         subcategory.subcategory_description = update_subcategory.subcategory_description
         subcategory.save()
-        return ResponseWrapper(status="SUCCESS", message="Subcategory Updated Successfully",
-                               data= SubcategoryResponse(
-                                   id = str(subcategory.id),
-                                   subcategory_id= subcategory.subcategory_id,
-                                   subcategory_name = subcategory.subcategory_name,
-                                   subcategory_description = subcategory.subcategory_description,
-                                   category = CategoryResponse(
-                                       id = str(subcategory.category.id),
-                                       category_id = subcategory.category.category_id,
-                                       category_name = subcategory.category.category_name,
-                                       category_description = subcategory.category.category_description,
-                                       created_at = subcategory.category.created_at,
-                                       updated_at = subcategory.category.updated_at
-                                       ),
-                                   created_at = subcategory.created_at,
-                                   updated_at = subcategory.updated_at
-                               ),error=None)
+        return ResponseWrapper(status="SUCCESS", message="Subcategory Updated Successfully", data=create_subcategory_response(subcategory), error=None)
 
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=str(e))

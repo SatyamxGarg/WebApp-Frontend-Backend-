@@ -7,6 +7,7 @@ from app.models.cart import Cart
 from app.models.user import User
 from app.models.product import Product
 from app.dependencies.get_user import get_current_user
+from app.utils.models_2_schemas.cart import create_cart_response
 
 router = APIRouter()
 
@@ -31,15 +32,7 @@ async def add_to_cart(cart_request: CartRequest):
         )
         cart.save()
         
-        return ResponseWrapper(status="SUCCESS",message="Item is added to cart",
-                               data=CartResponse(
-                                   id=str(cart.id),
-                                   email=str(user.email),
-                                   product_id = str(product.id),
-                                   quantity = cart.quantity,    
-                                   created_at=str(cart.created_at),
-                                   updated_at=str(cart.updated_at)
-                                ),error=None)
+        return ResponseWrapper(status="SUCCESS",message="Item is added to cart",data=create_cart_response(cart),error=None)
 
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -50,19 +43,10 @@ async def add_to_cart(cart_request: CartRequest):
 async def get_cart_item(user: User = Depends(get_current_user)):
     try:
         cart_items: List[Cart] = Cart.objects(user=user)
-        cart_list = [
-            CartResponse(
-                id=str(cart_item.id),
-                email=str(user.email),
-                product_id=str(cart_item.product.id),
-                quantity=cart_item.quantity,
-                created_at=str(cart_item.created_at),
-                updated_at=str(cart_item.updated_at)
-            )
-            for cart_item in cart_items
-        ]
-        
-        return ResponseWrapper(status="SUCCESS", message="Cart Items Fetched Successfully",data=cart_list,error=None)
+        return ResponseWrapper(status="SUCCESS", message="Cart Items Fetched Successfully",data=[
+                               create_cart_response(cart)
+                               for cart in cart_items],
+                               error=None)
         
     except:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Error occurs while fetching cart items")
@@ -78,16 +62,7 @@ async def update_cart_item_quantity(id: str, cart_update: CartUpdate, user = Dep
 
         cart_item.quantity = cart_update.quantity
         cart_item.save()
-        
-        return ResponseWrapper(status="SUCCESS",message="Cart Item updated successfully",
-                               data=CartResponse(
-                                   id=str(cart_item.id),
-                                   email=str(cart_item.user.email),
-                                   product_id = str(cart_item.product.id),
-                                   quantity = cart_item.quantity,
-                                   created_at=str(cart_item.created_at),
-                                   updated_at=str(cart_item.updated_at)
-                                ),error=None)
+        return ResponseWrapper(status="SUCCESS",message="Cart Item updated successfully",data=create_cart_response(cart_item),error=None)
 
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=str(e))
