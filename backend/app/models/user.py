@@ -1,6 +1,6 @@
 from mongoengine import Document, StringField, EmailField, DateTimeField, BooleanField, ListField, ReferenceField
 from datetime import datetime
-from app.utils.crypto import hash_password, verify_password
+from app.utils import hash_password, verify_password
 from . import TimestampMixin
 
 class User(Document, TimestampMixin):

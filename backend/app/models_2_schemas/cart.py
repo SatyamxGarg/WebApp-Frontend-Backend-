@@ -1,7 +1,7 @@
 from app.models.cart import Cart
 from app.schemas.cart import CartResponse
-from app.utils.models_2_schemas.user import create_user_response
-from app.utils.models_2_schemas.product import create_product_response
+from app.models_2_schemas.user import create_user_response
+from app.models_2_schemas.product import create_product_response
 
 
 def create_cart_response(cart: Cart) -> CartResponse :

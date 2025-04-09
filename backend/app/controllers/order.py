@@ -7,7 +7,7 @@ from app.models.user import User
 from app.dependencies.get_user import get_current_user
 from app.models.order import Order, OrderStatus
 from app.schemas.order import OrderResponse, RequestOrderStatus
-from app.utils.models_2_schemas.order import create_order_response
+from app.models_2_schemas.order import create_order_response
 
 router = APIRouter()
 

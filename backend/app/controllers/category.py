@@ -4,7 +4,7 @@ from mongoengine import ValidationError
 from app.schemas import ResponseWrapper
 from app.schemas.category import CategoryRequest, CategoryResponse, UpdateCategory
 from app.models.category import Category
-from app.utils.models_2_schemas.category import create_category_response
+from app.models_2_schemas.category import create_category_response
 
 router = APIRouter()
 

@@ -6,7 +6,7 @@ from app.dependencies.get_user import get_current_user
 from app.schemas.review import ReviewRequest, ReviewResponse
 from app.models.product import Product
 from app.models.review import Review
-from app.utils.models_2_schemas.review import create_review_response
+from app.models_2_schemas.review import create_review_response
 
 router = APIRouter()
 

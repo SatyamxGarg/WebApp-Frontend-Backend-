@@ -5,7 +5,7 @@ from app.schemas import ResponseWrapper
 from app.schemas.category import SubcategoryRequest, SubcategoryResponse, UpdateSubcategory
 from app.models.category import Category
 from app.models.subcategory import Subcategory
-from app.utils.models_2_schemas.subcategory import create_subcategory_response
+from app.models_2_schemas.subcategory import create_subcategory_response
 
 router = APIRouter()
 

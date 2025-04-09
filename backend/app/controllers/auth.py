@@ -8,7 +8,7 @@ from app.configs import settings
 from app.schemas.auth import Token, UserLogin, UserSignUp, UpdateUser
 from app.schemas import ResponseWrapper
 from app.models.user import User
-from app.utils.crypto import hash_password, verify_password
+from app.utils import hash_password, verify_password
 from app.dependencies import get_current_user
 
 router = APIRouter()

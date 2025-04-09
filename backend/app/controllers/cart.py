@@ -7,7 +7,7 @@ from app.models.cart import Cart
 from app.models.user import User
 from app.models.product import Product
 from app.dependencies.get_user import get_current_user
-from app.utils.models_2_schemas.cart import create_cart_response
+from app.models_2_schemas.cart import create_cart_response
 
 router = APIRouter()
 

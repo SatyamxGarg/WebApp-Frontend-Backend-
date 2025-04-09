@@ -1,6 +1,6 @@
 from app.models.subcategory import Subcategory
 from app.schemas.category import SubcategoryResponse
-from app.utils.models_2_schemas.category import create_category_response
+from app.models_2_schemas.category import create_category_response
 
 
 def create_subcategory_response(subcategory: Subcategory) -> SubcategoryResponse:

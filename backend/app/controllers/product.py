@@ -5,7 +5,7 @@ from app.schemas.product import ProductRequest, ProductResponse, UpdateProduct
 from app.schemas import ResponseWrapper
 from app.models.product import Product
 from app.models.subcategory import Subcategory
-from app.utils.models_2_schemas.product import create_product_response
+from app.models_2_schemas.product import create_product_response
 
 router = APIRouter()
 

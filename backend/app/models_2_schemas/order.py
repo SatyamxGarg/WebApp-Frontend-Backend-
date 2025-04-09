@@ -1,7 +1,7 @@
 from app.models.order import Order
 from app.schemas.order import OrderResponse
-from app.utils.models_2_schemas.user import create_user_response
-from app.utils.models_2_schemas.product import create_product_response
+from app.models_2_schemas.user import create_user_response
+from app.models_2_schemas.product import create_product_response
 
 
 def create_order_response(order: Order) -> OrderResponse:

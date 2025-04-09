@@ -1,6 +1,6 @@
 from app.models.product import Product
 from app.schemas.product import ProductResponse
-from app.utils.models_2_schemas.subcategory import create_subcategory_response
+from app.models_2_schemas.subcategory import create_subcategory_response
 
 
 def create_product_response(product: Product) -> ProductResponse:
