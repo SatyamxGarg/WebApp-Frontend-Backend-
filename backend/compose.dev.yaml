@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: shoping_mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: shopping
+    networks:
+      - shoping_network
+    volumes:
+      - mongo_volume:/data/db
+
+  backend:
+    container_name: shoping_backend
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - mongodb
+    env_file:
+      - ../backend/.env
+    volumes:
+      - ../backend:/app
+    networks:
+      - shoping_network
+    ports:
+      - "9000:9000"
+
+volumes:
+  mongo_volume:
+
+networks:
+  shoping_network:
+    driver: bridge
